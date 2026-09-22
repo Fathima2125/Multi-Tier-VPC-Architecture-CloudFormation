@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>technical-documentation.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="technical-documentation">Technical Documentation</h1>
+<h2 id="multi-tier-aws-vpc-architecture">MULTI-TIER AWS VPC ARCHITECTURE</h2>
+<p>=========================================</p>
+<h2 id="1-document-information">1. Document Information</h2>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Item                                Details</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>Project Name                    Multi-Tier AWS VPC Architecture</p>
+<p>Program                         AWS She Builds Mentorship Program 2026</p>
+<p>Author                          Fathima Yosra Ajeeb</p>
+<p>AWS Region                      us-east-1(Northern - Virginia)</p>
+<p>Architecture Type               Three-Tier, Multi-AZ VPC</p>
+<p>Infrastructure Approach         Manual AWS Console + Infrastructure as Code</p>
+<p>IaC Tool                        AWS CloudFormation</p>
+<p>Date                            September 22, 2026</p>
+<hr>
+<h2 id="2-purpose">2. Purpose</h2>
+<p>The purpose of this project is to design and deploy a secure, highly available, and logically isolated <strong>three-tier AWS VPC architecture</strong>.</p>
+<p>The architecture separates resources into <strong>Public, Application, and Database tiers</strong> across two Availability Zones. Network traffic is controlled using <strong>Route Tables, Security Groups, and Network ACLs</strong>, while an Application Load Balancer distributes incoming traffic across application servers.</p>
+<p>The architecture was first implemented manually through the AWS Management Console and then reproduced using <strong>AWS CloudFormation</strong> to demonstrate Infrastructure as Code.</p>
+<hr>
+<h2 id="3-architecture-objectives">3. Architecture Objectives</h2>
+<p>The main objectives of the architecture are:</p>
+<ul>
+<li>Provide network isolation between different application layers.</li>
+<li>Separate public-facing and private resources.</li>
+<li>Improve availability by using two Availability Zones.</li>
+<li>Control network traffic using Security Groups and Network ACLs.</li>
+<li>Provide controlled internet access through an Internet Gateway and NAT Gateways.</li>
+<li>Distribute incoming application traffic using an Application Load Balancer.</li>
+<li>Allow secure management of EC2 instances through AWS Systems Manager.</li>
+<li>Create a reproducible infrastructure using CloudFormation.</li>
+<li>Follow security principles such as least privilege and restricted network access.</li>
+</ul>
+<hr>
+<h2 id="4-architecture-overview">4. Architecture Overview</h2>
+<p>The VPC follows a <strong>three-tier architecture</strong>:</p>
+<ol>
+<li><strong>Public Tier</strong> – Contains the Application Load Balancer and public-facing networking components.</li>
+<li><strong>Application Tier</strong> – Contains private EC2 instances running the application/web layer.</li>
+<li><strong>Database Tier</strong> – Contains private subnets reserved for database resources.</li>
+</ol>
+<p>The architecture spans <strong>two Availability Zones</strong> to provide redundancy.</p>
+<h3 id="high-level-traffic-flow">High-Level Traffic Flow</h3>
+<pre class="hljs"><code><div>Internet
+   |
+Internet Gateway
+   |
+Application Load Balancer
+   |
+Target Group
+   |
+Private Application EC2 Instances
+   |
+Database Tier
+</div></code></pre>
+<p>The Application and Database tiers are not directly accessible from the public internet.</p>
+<hr>
+<h2 id="5-architecture-diagram">5. Architecture Diagram</h2>
+<p><img src="file:///Users/fathimayosraajeeb/aws-devops-mentorship/cloudformation/Multi-Tier VPC -architecture.drawio.png" alt="Diagram"></p>
+<hr>
+<h2 id="6-vpc-specification">6. VPC Specification</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>VPC Name</strong></td>
+<td><code>cfn-devops-vpc</code></td>
+</tr>
+<tr>
+<td><strong>VPC CIDR</strong></td>
+<td><code>10.0.0.0/16</code></td>
+</tr>
+<tr>
+<td><strong>Availability Zones</strong></td>
+<td>Two AZs</td>
+</tr>
+<tr>
+<td><strong>Public Subnets</strong></td>
+<td><code>10.0.101.0/24</code>, <code>10.0.102.0/24</code></td>
+</tr>
+<tr>
+<td><strong>Private App Subnets</strong></td>
+<td><code>10.0.111.0/24</code>, <code>10.0.112.0/24</code></td>
+</tr>
+<tr>
+<td><strong>Private DB Subnets</strong></td>
+<td><code>10.0.121.0/24</code>, <code>10.0.122.0/24</code></td>
+</tr>
+<tr>
+<td><strong>Internet Gateway</strong></td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>NAT Gateways</strong></td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>Application Load Balancer</strong></td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>EC2 Instances</strong></td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>Target Group</strong></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>The VPC uses a <code>/16</code> CIDR block, which provides sufficient address space for the current architecture and future expansion.</p>
+<hr>
+<h2 id="7-subnet-design">7. Subnet Design</h2>
+<p>The VPC contains six subnets distributed across two Availability Zones.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>AZ-A</th>
+<th>AZ-B</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public</td>
+<td><code>10.0.101.0/24</code></td>
+<td><code>10.0.102.0/24</code></td>
+<td>ALB and NAT Gateways</td>
+</tr>
+<tr>
+<td>Application</td>
+<td><code>10.0.111.0/24</code></td>
+<td><code>10.0.112.0/24</code></td>
+<td>Private EC2 instances</td>
+</tr>
+<tr>
+<td>Database</td>
+<td><code>10.0.121.0/24</code></td>
+<td><code>10.0.122.0/24</code></td>
+<td>Database resources</td>
+</tr>
+</tbody>
+</table>
+<h3 id="public-tier">Public Tier</h3>
+<p>The public subnets have routes to the Internet Gateway. They are designed to host internet-facing networking components such as the ALB and NAT Gateways.</p>
+<h3 id="application-tier">Application Tier</h3>
+<p>The application subnets are private and contain the EC2 instances. They do not have direct routes to the Internet Gateway.</p>
+<h3 id="database-tier">Database Tier</h3>
+<p>The database subnets are private and isolated from direct internet access. They are intended for database resources and only allow required traffic from the application layer.</p>
+<hr>
+<h2 id="8-routing--internet-connectivity">8. Routing &amp; Internet Connectivity</h2>
+<h3 id="81-internet-gateway">8.1 Internet Gateway</h3>
+<p>The Internet Gateway provides connectivity between the VPC and the public internet.</p>
+<p>The public route tables contain:</p>
+<pre class="hljs"><code><div>0.0.0.0/0 → Internet Gateway
+</div></code></pre>
+<p>This allows resources in the public subnets to communicate with the internet where permitted.</p>
+<h3 id="82-nat-gateways">8.2 NAT Gateways</h3>
+<p>Two NAT Gateways are deployed, one in each public subnet.</p>
+<pre class="hljs"><code><div>Private App Subnet A → NAT Gateway A → Internet Gateway
+Private App Subnet B → NAT Gateway B → Internet Gateway
+</div></code></pre>
+<p>NAT allows private instances to initiate outbound internet connections without allowing unsolicited inbound internet connections to those instances.</p>
+<h3 id="83-route-tables">8.3 Route Tables</h3>
+<p>Separate route tables are used for the different tiers.</p>
+<ul>
+<li>Public Route Table</li>
+<li>Private Application Route Table A</li>
+<li>Private Application Route Table B</li>
+<li>Private Database Route Table A</li>
+<li>Private Database Route Table B</li>
+</ul>
+<p>This provides granular control over where traffic can be routed.</p>
+<hr>
+<h2 id="9-security-architecture">9. Security Architecture</h2>
+<h3 id="91-security-groups">9.1 Security Groups</h3>
+<p>Security Groups provide <strong>stateful, instance-level traffic control</strong>.</p>
+<h4 id="alb-security-group-alb-sg">ALB Security Group (alb-sg)</h4>
+<ul>
+<li>Allows HTTP traffic on port <strong>80</strong> from the internet.</li>
+<li>Allows required outbound traffic to the application layer.</li>
+</ul>
+<pre class="hljs"><code><div>Inbound:
+TCP 80 → 0.0.0.0/0
+</div></code></pre>
+<h4 id="application-security-groupapp-sg">Application Security Group(app-sg)</h4>
+<p>The application EC2 instances only accept HTTP traffic from the ALB Security Group.</p>
+<pre class="hljs"><code><div>Inbound:
+TCP 80 → ALB Security Group
+</div></code></pre>
+<p>This prevents direct public access to the EC2 instances.</p>
+<h4 id="database-security-groupdb-sg">Database Security Group(db-sg)</h4>
+<p>The database layer allows PostgreSQL traffic only from the application security group.</p>
+<pre class="hljs"><code><div>Inbound:
+TCP 5432 → Application Security Group
+</div></code></pre>
+<hr>
+<h2 id="92-network-acls">9.2 Network ACLs</h2>
+<p>Network ACLs provide <strong>stateless subnet-level traffic control</strong>.</p>
+<p>Separate NACLs are configured for:</p>
+<ul>
+<li>Public subnets(public - Nacl)</li>
+<li>Application subnets(app - Nacl)</li>
+<li>Database subnets(db - Nacl)</li>
+</ul>
+<h3 id="public-nacl">Public-Nacl</h3>
+<h5 id="inbound-rules">Inbound Rules</h5>
+<pre class="hljs"><code><div>
+Rule Number |   Type    |   Protocol    |   Port Range  |   Source  |   Allow/Deny  |
+-------------------------------------------------------------------------------------
+  100        HTTP(80)      TCP(6)          80               0.0.0.0/0         ALlow      
+  110        HTTPS(443)    TCP(6)          443              0.0.0.0/0         Allow
+  120        Custom TCP    TCP(6)          1024-65535       0.0.0.0/0         Allow
+  130        Custom TCP    TCP(6)          1024-65535       10.0.111.0/24     Allow
+  140        Custom TCP    TCP(6)          1024-65535       10.0.112.0/24     Allow
+  *          All Traffic    All             All             0.0.0.0/0         Deny
+</div></code></pre>
+<h4 id="outbound-rules">Outbound Rules</h4>
+<pre class="hljs"><code><div>
+Rule Number |   Type    |   Protocol    |   Port Range  |   Source  |   Allow/Deny  |
+-------------------------------------------------------------------------------------
+  100        HTTP(80)      TCP(6)          80                10.0.111.0/24     ALlow      
+  110        HTTP(80)      TCP(6)          80                10.0.112.0/24     Allow
+  120        HTTPS(443)    TCP(6)          443               0.0.0.0/0         Allow
+  130        HTTP(80)      TCP(6)          80                0.0.0.0/0         Allow
+  140        Custom TCP    TCP(6)          1024-65535        0.0.0.0/0         Allow
+  *          All Traffic    All            All               0.0.0.0/0         Deny
+</div></code></pre>
+<h3 id="app-nacl">App-Nacl</h3>
+<h5 id="inbound-rules">Inbound Rules</h5>
+<pre class="hljs"><code><div>
+Rule Number |   Type    |   Protocol    |   Port Range  |   Source  |   Allow/Deny  |
+-------------------------------------------------------------------------------------
+  100        HTTP(80)      TCP(6)          80               10.0.101.0/24    ALlow      
+  110        HTTP(80)      TCP(6)          80               10.0.102.0/24    Allow
+  120        Custom TCP    TCP(6)          1024-65535       10.0.101.0/24    Allow
+  130        Custom TCP    TCP(6)          1024-65535       10.0.102.0/24    Allow
+  140        Custom TCP    TCP(6)          1024-65535       10.0.121.0/24    Allow
+  150        Custom TCP    TCP(6)          1024-65535       10.0.122.0/24    Allow
+  160        DNS(UDP)      UDP(17)         53               10.0.0.0/16      Allow
+  170        DNS(TCP)      TCP(6)          53               10.0.0.0/16      Allow
+  180        Custom TCP    TCP(6)          1024-65535       0.0.0.0/0        Allow  
+  *          All Traffic    All             All             0.0.0.0/0        Deny
+</div></code></pre>
+<h4 id="outbound-rules">Outbound Rules</h4>
+<pre class="hljs"><code><div>
+Rule Number |   Type    |   Protocol    |   Port Range  |       Source  |       Allow/Deny  |
+---------------------------------------------------------------------------------------------
+  100        Custom TCP         TCP(6)        1024-65535        10.0.101.0/24     ALlow      
+  110        Custom TCP         TCP(6)        1024-65535        10.0.102.0/24     ALlow 
+  120        PostgreSQL(5432)   TCP(6)        5432              10.0.121.0/24     Allow
+  130        PostgreSQL(5432)   TCP(6)        5432              10.0.122.0/24     Allow
+  140        HTTPS(443)         TCP(6)        443               0.0.0.0/0         Allow
+  150        HTTP(80)           TCP(6)        80                0.0.0.0/0         Allow
+  160        DNS(UDP)           UDP(17)       53                10.0.100.2/32     Allow
+  170        DNS(TCP)           TCP(6)        53                10.0.100.2/32     Allow
+  180        Custom UDP         UDP(17)       123               10.0.100.2/32     Allow
+  *          All Traffic        All           All               0.0.0.0/0         Deny
+</div></code></pre>
+<h3 id="db-nacl">db-Nacl</h3>
+<h5 id="inbound-rules">Inbound Rules</h5>
+<pre class="hljs"><code><div>
+Rule Number |   Type    |   Protocol    |   Port Range  |       Source  |       Allow/Deny  |
+---------------------------------------------------------------------------------------------
+  100        PostgreSQL(5432)   TCP(6)          5432            10.0.111.0/24     Allow    
+  110        PostgreSQL(5432)   TCP(6)          5432            10.0.112.0/24     Allow
+  120        Custom TCP         TCP(6)          1024-65535      10.0.111.0/24     Allow
+  130        Custom TCP         TCP(6)          1024-65535      10.0.112.0/24     Allow  
+  *          All Traffic        All             All             0.0.0.0/0         Deny
+</div></code></pre>
+<h4 id="outbound-rules">Outbound Rules</h4>
+<pre class="hljs"><code><div>
+Rule Number |   Type    |   Protocol    |      Port Range  |       Source  |       Allow/Deny  |
+------------------------------------------------------------------------------------------------
+  100       Custom TCP         TCP(6)          1024-65535      10.0.111.0/24        Allow
+  110       Custom TCP         TCP(6)          1024-65535      10.0.112.0/24        Allow  
+  *          All Traffic        All           All               0.0.0.0/0           Deny
+</div></code></pre>
+<p>The NACL rules restrict traffic based on source/destination CIDRs, protocols, and ports.</p>
+<p>The database NACL, for example, permits PostgreSQL traffic from the application subnets and required return/ephemeral traffic.</p>
+<hr>
+<h2 id="10-compute--application-layer">10. Compute &amp; Application Layer</h2>
+<p>Two EC2 instances are deployed in the private application subnets:</p>
+<ul>
+<li>EC2 Instance A → Application Subnet A</li>
+<li>EC2 Instance B → Application Subnet B</li>
+</ul>
+<p>The instances run <strong>Amazon Linux 2023</strong> with Nginx used to serve test web pages.</p>
+<h4 id="user-data-provided-in-cloudformation-template-for-ec2--a">User Data Provided In CloudFormation Template for EC2- A</h4>
+<pre class="hljs"><code><div>UserData:
+        Fn::Base64: |
+          #!/bin/bash
+
+          dnf update -y
+          dnf install -y nginx
+
+          systemctl enable nginx
+          systemctl start nginx
+
+          cat &gt; /usr/share/nginx/html/index.html &lt;&lt;'EOF'
+          &lt;!DOCTYPE html&gt;
+          &lt;html&gt;
+          &lt;head&gt;
+              &lt;title&gt;CloudFormation EC2-A&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;
+              &lt;h1&gt;CloudFormation EC2-A&lt;/h1&gt;
+              &lt;p&gt;Nginx is running on Application Server A.&lt;/p&gt;
+          &lt;/body&gt;
+          &lt;/html&gt;
+          EOF
+
+</div></code></pre>
+<p>The instances do not require public IP addresses.</p>
+<p>AWS Systems Manager is used for secure management through the IAM role:</p>
+<p><code>AmazonSSMManagedInstanceCore</code></p>
+<p>This allows administration without exposing SSH directly to the internet.</p>
+<hr>
+<h2 id="11-load-balancing">11. Load Balancing</h2>
+<p>An <strong>Application Load Balancer (ALB)</strong> is deployed across the public subnets.</p>
+<p>The ALB:</p>
+<ol>
+<li>Receives HTTP requests from clients.</li>
+<li>Uses a listener on port 80.</li>
+<li>Forwards requests to the Target Group.</li>
+<li>Distributes requests between the private EC2 instances.</li>
+<li>Performs health checks on the targets.</li>
+</ol>
+<p>The target group contains both application EC2 instances.</p>
+<p>The targets were successfully validated as <strong>healthy</strong> during testing.</p>
+<hr>
+<h2 id="12-traffic-flow">12. Traffic Flow</h2>
+<h4 id="the-primary-incoming-traffic-path-is">The primary incoming traffic path is:</h4>
+<pre class="hljs"><code><div>Client
+  ↓
+Internet
+  ↓
+Internet Gateway
+  ↓
+Application Load Balancer
+  ↓
+Target Group
+  ↓
+Private EC2 Instance
+</div></code></pre>
+<p>The following components control or influence this traffic:</p>
+<ul>
+<li><strong>Route Tables</strong> determine where packets are routed.</li>
+<li><strong>NACLs</strong> control traffic at the subnet level.</li>
+<li><strong>Security Groups</strong> control traffic at the resource level.</li>
+<li><strong>ALB</strong> distributes traffic between application instances.</li>
+</ul>
+<h4 id="for-outbound-internet-access-from-private-application-instances">For outbound internet access from private application instances:</h4>
+<pre class="hljs"><code><div>Private EC2
+   ↓
+Private Route Table
+   ↓
+NAT Gateway
+   ↓
+Public Route Table
+   ↓
+Internet Gateway
+   ↓
+Internet
+</div></code></pre>
+<hr>
+<h2 id="13-high-availability--resilience">13. High Availability &amp; Resilience</h2>
+<p>The architecture uses two Availability Zones to reduce dependence on a single AZ.</p>
+<p>High-availability features include:</p>
+<ul>
+<li>Two public subnets.</li>
+<li>Two private application subnets.</li>
+<li>Two private database subnets.</li>
+<li>EC2 instances distributed across two AZs.</li>
+<li>ALB deployed across multiple AZs.</li>
+<li>NAT Gateway in each AZ.</li>
+</ul>
+<p>If one application instance becomes unavailable, the ALB can continue sending traffic to a healthy target in the other Availability Zone.</p>
+<hr>
+<h2 id="14-iam--access-management">14. IAM &amp; Access Management</h2>
+<p>IAM is used to control access to AWS resources.</p>
+<p>The EC2 instances use an IAM role containing:</p>
+<p><code>AmazonSSMManagedInstanceCore</code></p>
+<p>This allows Systems Manager to establish management access without requiring publicly exposed SSH access.</p>
+<p>The architecture follows the principle of <strong>least privilege</strong>, where resources should receive only the permissions and network access required for their function.</p>
+<hr>
+<h2 id="15-deployment--implementation">15. Deployment &amp; Implementation</h2>
+<p>The architecture was implemented in two stages.</p>
+<h3 id="stage-1-%E2%80%93-manual-deployment">Stage 1 – Manual Deployment</h3>
+<p>The VPC and its components were initially created through the AWS Management Console.</p>
+<p>The following were configured manually:</p>
+<ul>
+<li>VPC</li>
+<li>Six subnets</li>
+<li>Internet Gateway</li>
+<li>NAT Gateways</li>
+<li>Route Tables</li>
+<li>Security Groups</li>
+<li>Network ACLs</li>
+<li>EC2 instances</li>
+<li>IAM role</li>
+<li>Target Group</li>
+<li>Application Load Balancer</li>
+</ul>
+<h3 id="stage-2-%E2%80%93-infrastructure-as-code">Stage 2 – Infrastructure as Code</h3>
+<p>The architecture was reproduced using <strong>AWS CloudFormation</strong>.</p>
+<p>CloudFormation defines the infrastructure as code, making the environment:</p>
+<ul>
+<li>Reproducible</li>
+<li>Consistent</li>
+<li>Easier to modify</li>
+<li>Easier to deploy again</li>
+<li>Less dependent on manual configuration</li>
+</ul>
+<h4 id="terminal-commands">Terminal Commands</h4>
+<ol>
+<li>
+<h5 id="validate-cloudformation-template">Validate Cloudformation Template</h5>
+</li>
+</ol>
+<pre class="hljs"><code><div>
+aws-cloudformation validate-template \
+    --template-body file://devops-network-cfn.yaml
+
+</div></code></pre>
+<ol start="2">
+<li>
+<h5 id="deploy-cloudformation-stack">Deploy Cloudformation stack</h5>
+</li>
+</ol>
+<pre class="hljs"><code><div>aws cloudformation deploy \
+    --template-file devops-network-cfn.yaml \
+    --stack-name cfn-devops-network \
+    --capabilities CAPABILITY_NAMED_IAM \
+    --parameter-overrides AmazonLinuxAMI=&lt;ami name&gt; \
+    --region us-east-1
+
+</div></code></pre>
+<ol start="3">
+<li>
+<h5 id="check-cloudformation-stack-status">Check Cloudformation Stack status</h5>
+</li>
+</ol>
+<pre class="hljs"><code><div>aws cloudformation describe-stacks \
+    --stack-name cfn-devops-network \
+    --region us-east-1
+    --query &quot;Stacks[0].[STackStatus, StackStatusReason]&quot; \
+    --output table
+
+</div></code></pre>
+<hr>
+<h2 id="16-validation--testing">16. Validation &amp; Testing</h2>
+<p>The following tests were performed to validate the architecture:</p>
+<h3 id="network-validation">Network Validation</h3>
+<ul>
+<li>Confirmed all six subnets were created.</li>
+<li>Verified subnet-to-route-table associations.</li>
+<li>Verified Internet Gateway attachment.</li>
+<li>Verified NAT Gateway configuration.</li>
+<li>Verified appropriate routes.</li>
+</ul>
+<h3 id="security-validation">Security Validation</h3>
+<ul>
+<li>Verified Security Group rules.</li>
+<li>Verified NACL rules.</li>
+<li>Confirmed application instances were not directly publicly accessible.</li>
+<li>Confirmed database access was restricted to the application layer.</li>
+</ul>
+<h3 id="application-validation">Application Validation</h3>
+<ul>
+<li>Confirmed EC2 instances were running.</li>
+<li>Confirmed instances were accessible through AWS Systems Manager.</li>
+<li>Confirmed ALB target health.</li>
+<li>Confirmed ALB successfully served responses from the private EC2 instances.</li>
+</ul>
+<h3 id="access-validation">Access Validation</h3>
+<p>The EC2 instances were successfully managed through <strong>SSM/Fleet Manager</strong>, avoiding the need for public SSH access.</p>
+<h3 id="validation-for-cloudformation-version">Validation for Cloudformation Version</h3>
+<ol>
+<li>
+<h4 id="generated-cloudformation-outputs">Generated Cloudformation Outputs</h4>
+</li>
+</ol>
+<pre class="hljs"><code><div>aws cloudformation describe-stacks \
+    --stack-name cfn-devops-network \
+    --region us-east-1 \
+    --query &quot;Stacks[0].Outputs[*].[OutputKey,OutputValue]&quot; \
+    --output table
+
+</div></code></pre>
+<ol start="2">
+<li>
+<h4 id="check-ssm-connectivity">Check SSM Connectivity</h4>
+</li>
+</ol>
+<p>Show whether EC2 instances aree registered and connected to System Manager.</p>
+<pre class="hljs"><code><div>aws ssm describe-instance-information \
+    --region us-east-1 \
+    --query &quot;InstanceInformationList[].[InstanceId,PingStatus,PlatformName,AgentVersion]&quot; \
+    --output table
+</div></code></pre>
+<ol start="3">
+<li>
+<h4 id="target-group-health">Target Group Health</h4>
+</li>
+</ol>
+<pre class="hljs"><code><div>
+aws elbv2 describe-target-health \
+    --target-group-arn YOUR_TARGET_GROUP_ARN \
+    --region us-east-1 \
+    --query &quot;TargetHealthDescriptions[].[TargetId,Target.Port,TargetHealth.State,TargetHealth.Reason,TargetHealth.Description]&quot; \
+    --output table
+</div></code></pre>
+<ol start="4">
+<li>
+<h4 id="alb-verfication">ALB Verfication</h4>
+</li>
+</ol>
+<pre class="hljs"><code><div>
+curl  http://YOUR_ALB_DNS_NAME
+
+</div></code></pre>
+<hr>
+<h1 id="17-cost-considerations">17. Cost Considerations</h1>
+<p>The architecture includes AWS resources that generate ongoing costs, particularly:</p>
+<ul>
+<li>NAT Gateways</li>
+<li>Application Load Balancer</li>
+<li>EC2 instances</li>
+<li>Data transfer</li>
+<li>Other associated AWS services</li>
+</ul>
+<p>Two NAT Gateways improve availability but increase cost compared with using a single NAT Gateway.</p>
+<p>A billing alarm is configured to provide cost monitoring and help identify unexpected AWS spending.</p>
+<p>The Cloudformation Stack is deleted After use and then recreated when needed.</p>
+<p>For a production environment, costs should be reviewed against availability and security requirements.</p>
+<hr>
+<h1 id="18-conclusion">18. Conclusion</h1>
+<p>This project demonstrates the design and implementation of a secure, isolated and highly available <strong>three-tier AWS VPC architecture</strong>.</p>
+<p>The architecture separates public, application, and database network layers while using Security Groups, Network ACLs and Route Tables to control communication.</p>
+<p>The use of two Availability Zones improves resilience, while the Application Load Balancer provides controlled access to private application servers.</p>
+<p>The architecture was first deployed manually to understand the underlying AWS networking components and was subsequently reproduced using CloudFormation to demonstrate Infrastructure as Code and repeatable infrastructure deployment.</p>
+<hr>
+<h1 id="19-future-improvements">19. Future Improvements</h1>
+<p>Potential future improvements include:</p>
+<ul>
+<li>Implement Auto Scaling for EC2 instances.</li>
+<li>Replace test EC2 web servers with a production application.</li>
+<li>Deploy Amazon RDS across the database subnets.</li>
+<li>Add AWS WAF in front of the ALB.</li>
+<li>Add CloudWatch monitoring and centralized logging.</li>
+<li>Implement automated CI/CD deployment.</li>
+<li>Add additional security controls and automated compliance checks.</li>
+<li>Extend the CloudFormation template to fully automate the environment.</li>
+<li>Evaluate Terraform as an alternative Infrastructure as Code solution.</li>
+</ul>
+<hr>
+
+</body>
+</html>
