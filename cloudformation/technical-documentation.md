@@ -591,7 +591,7 @@ curl  http://YOUR_ALB_DNS_NAME
 
 ------------------------------
 
-# 17. Cost Considerations
+## 17. Cost Considerations
 
 The architecture includes AWS resources that generate ongoing costs, particularly:
 
@@ -611,7 +611,7 @@ For a production environment, costs should be reviewed against availability and 
 
 ----------------------------
 
-# 18. Conclusion
+## 18. Conclusion
 
 This project demonstrates the design and implementation of a secure, isolated and highly available **three-tier AWS VPC architecture**.
 
@@ -623,7 +623,7 @@ The architecture was first deployed manually to understand the underlying AWS ne
 
 -----------------------------
 
-# 19. Future Improvements
+## 19. Future Improvements
 
 Potential future improvements include:
 
