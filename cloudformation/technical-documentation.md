@@ -5,24 +5,26 @@
 
 ## 1. Document Information
 
-----------------------------------------------------------------------------
-Item                                Details                                |
-----------------------------------------------------------------------------
-Project Name                    Multi-Tier AWS VPC Architecture
 
-Program                         AWS She Builds Mentorship Program 2026
+| Component                     | Specification                   |
+ ----------------------------- | --------------------------------|
+  
+  Project Name                    Multi-Tier AWS VPC Architecture 
+  
+  Program                         AWS She Builds Mentorship Program 2026
 
-Author                          Fathima Yosra Ajeeb
+  Author                          Fathima Yosra Ajeeb
 
-AWS Region                      us-east-1(Northern - Virginia)
+  AWS Region                      us-east-1(Northern - Virginia)
 
-Architecture Type               Three-Tier, Multi-AZ VPC
+  Architecture Type               Three-Tier, Multi-AZ VPC
 
-Infrastructure Approach         Manual AWS Console + Infrastructure as Code
+  Infrastructure Approach         Manual AWS Console + Infrastructure as Code
 
-IaC Tool                        AWS CloudFormation
+  IaC Tool                        AWS CloudFormation
+    
+  Date                            September 22, 2026
 
-Date                            September 22, 2026
 
 ----------------------------------------------
 ## 2. Purpose
