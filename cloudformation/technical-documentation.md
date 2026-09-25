@@ -85,7 +85,7 @@ The Application and Database tiers are not directly accessible from the public i
 
 ## 5. Architecture Diagram
 
-![Diagram](<Multi-Tier VPC -architecture.drawio.png>)
+![Digram](<FinalMulti-VPC Diagram.drawio.png>)
 
 -------------------------------------------
 

@@ -71,7 +71,18 @@ The ALB receives external HTTP traffic and forwards requests to the EC2 instance
 
 ## 4. Containerization Architecture
 
-The containerized deployment changes the application layer from:
+### 4.1 The containerization process aims to:
+
+*   Package the application and dependencies    together.
+*   Create a consistent runtime environment.
+*   Reduce dependency on the underlying EC2 operating system.
+*   Make application deployment portable.
+*   Simplify application versioning.
+*   Prepare the application for container orchestration.
+*   Maintain the existing network isolation and security model.
+
+
+### 4.2  The containerized deployment changes the application layer from:
 
 ```text
 EC2
@@ -109,7 +120,11 @@ Nginx :80
 
 The EC2 host remains part of the VPC. The Docker container runs inside the EC2 host.
 
----
+### 4.3 Architecture Diagram
+
+![Diagram](<FinalMulti-VPC Diagram.drawio.png>)
+
+-------
 
 ## 5. Phase 1 – Application Preparation
 
